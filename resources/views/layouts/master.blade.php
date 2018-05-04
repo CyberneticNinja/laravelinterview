@@ -10,10 +10,10 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://127.0.0.1:8000/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="http://127.0.0.1:8000/css/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
@@ -35,9 +35,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('login') }}">Login</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">List</a>
-          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="{{ route('home') }}">List</a>
+          </li> -->
           @else
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
@@ -90,3 +90,4 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
+</html>

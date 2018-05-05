@@ -21,8 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('home', 'HomeController@index')->name('home');
 
   Route::get('list/delete/{id}','UserListController@deletelist')->where(['id' => '[0-9]+']);
-  Route::get('createlist','UserListController@showcreateList')->name('showcreateList');
-  Route::post('createlist','UserListController@createList');
+  Route::get('list/create','UserListController@showcreateList')->name('showcreateList');
+  Route::post('list/create','UserListController@createList');
 
   Route::get('list/update/{id}','UserListController@showUpdateForm')->where(['id' => '[0-9]+']);
   Route::patch('list/update','UserListController@updatelist')->name('updatelist');

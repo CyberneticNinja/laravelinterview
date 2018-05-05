@@ -3,7 +3,7 @@
 @section('content')
 <h1>Create New List</h1>
 <?php
-echo Form::open(['method'=>'post','url'=>'createlist']);
+echo Form::open(['method'=>'post','url'=>'list/create']);
 echo '<table>';
 echo '<tr><td>';
 echo Form::label('title', 'Title');

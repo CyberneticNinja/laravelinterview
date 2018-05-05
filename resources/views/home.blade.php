@@ -17,13 +17,13 @@
                 {{$list->title }}
               </td>
               <td>
-                <a class="nav-link" href="{{ url($urlupdate) }}">UPDATE</a>
+                <a class="nav-link" href="{{ url($urlupdate) }}">Update</a>
               </td>
               <td>
-                <a class="nav-link" href="{{ url($urldelete) }}">DELETE</a>
+                <a class="nav-link" href="{{ url($urldelete) }}">Delete</a>
               </td>
               <td>
-                <a class="nav-link" href='{{ url($url) }}'>Test</a>
+                <a class="nav-link" href='{{ url($url) }}'>Tasks</a>
               </td>
               </tr>
             @endforeach

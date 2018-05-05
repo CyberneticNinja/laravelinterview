@@ -9,17 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserListController extends Controller
 {
-    // public function showListForUser()
-    // {
-    //   $user = User::where('name',$this->getName())->first();
-    //   $lists = UserList::where('users_id',$user->id)->get();
-    //   $x = [];
-    //   foreach($lists as $list)
-    //   {
-    //     $x[] = $list->title;
-    //   }
-    // }
-
     /**
      * create a new list
      *

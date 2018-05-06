@@ -18,14 +18,24 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+  //home
   Route::get('home', 'HomeController@index')->name('home');
 
+  //lists
   Route::get('list/delete/{id}','UserListController@deletelist')->where(['id' => '[0-9]+']);
   Route::get('list/create','UserListController@showcreateList')->name('showcreateList');
   Route::post('list/create','UserListController@createList');
-
   Route::get('list/update/{id}','UserListController@showUpdateForm')->where(['id' => '[0-9]+']);
   Route::patch('list/update','UserListController@updatelist')->name('updatelist');
+
+  //tasks
+  Route::get('list/{id}/tasks','TaskController@showTasks')->where(['id' => '[0-9]+']);
+  Route::get('list/{id}/tasks/create','TaskController@showcreateTaskForm')->where(['id' => '[0-9]+']);
+  Route::post('list/tasks/create','TaskController@createTask');
+  Route::get('task/{id}/update','TaskController@showupdateTaskForm')->where(['id' => '[0-9]+']);
+  Route::patch('task/update','TaskController@updateTask');
+  Route::get('task/{id}/delete','TaskController@showdeleteConfirmationForm');
+  Route::delete('task/delete','TaskController@deleteTask');
 });
 
 

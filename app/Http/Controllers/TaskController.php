@@ -3,83 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\UserList;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  public function showTasks(Request $request)
+  {
+    $list = UserList::find($request->id);
+    $tasks = Task::where('user_lists_id',$list->id)->get();
+    return view('tasks',[
+      'list'=>$list,
+      'tasks'=>$tasks
+    ]);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function showcreateTaskForm(Request $request)
+  {
+    $list = UserList::find($request->id);
+    return view('createTaskForm',['list'=>$list]);
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function createTask(Request $request)
+  {
+    $request->validate([
+      'task' => 'required|string|max:191',
+    ]);
+    $task = new Task();
+    $task->text = $request->task;
+    $task->user_lists_id = $request->id;
+    $task->save();
+    return redirect()->route('home');
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Task $task)
-    {
-        //
-    }
+  public function showupdateTaskForm(Request $request)
+  {
+    $task = Task::where('id',$request->id)->get();
+    return view('taskUpdateForm',['task'=>$task]);
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
+  public function updateTask(Request $request)
+  {
+    $request->validate([
+      'task' => 'required|string|max:191',
+    ]);
+    $task = Task::where('id',$request->id)->first();
+    $task->text = $request->task;
+    $task->completed = $request->complete;
+    $task->save();
+    return redirect()->route('home');
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Task $task)
-    {
-        //
-    }
+  public function showdeleteConfirmationForm(Request $request)
+  {
+    $task = Task::where('id',$request->id)->first();
+    return view('taskDeleteConfirmForm',['task'=>$task]);
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Task $task)
+  public function deleteTask(Request $request)
+  {
+    if($request->delete == '1')
     {
-        //
+      $task = Task::where('id',$request->id)->first();
+      $task->delete();
     }
+    return redirect()->route('home');
+  }
 }

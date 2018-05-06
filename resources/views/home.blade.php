@@ -10,7 +10,7 @@
             @php
               $urlupdate = "list/update/".$list->id;
               $urldelete = "list/delete/".$list->id;
-              $url = "list/test/".$list->id;
+              $url = "list/".$list->id."/tasks";
             @endphp
             <tr>
               <td>

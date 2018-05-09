@@ -30,9 +30,18 @@ class UserListController extends Controller
 
     public function deletelist(Request $request)
     {
-      $userlist = UserList::find($request->id);
-      $userlist->delete();
+      if($request->delete == '1')
+      {
+        $userlist = UserList::find($request->id);
+        $userlist->delete();
+      }
       return redirect()->route('home');
+    }
+
+    public function showdeleteConfirmationForm(Request $request)
+    {
+      $list = UserList::where('id',$request->id)->first();
+      return view('userListDeletConfirmeForm',['list'=>$list]);
     }
 
     public function updatelist(Request $request)

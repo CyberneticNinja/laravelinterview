@@ -22,11 +22,12 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('home', 'HomeController@index')->name('home');
 
   //lists
-  Route::get('list/delete/{id}','UserListController@deletelist')->where(['id' => '[0-9]+']);
+  Route::get('list/delete/{id}','UserListController@showdeleteConfirmationForm')->where(['id' => '[0-9]+']);
   Route::get('list/create','UserListController@showcreateList')->name('showcreateList');
   Route::post('list/create','UserListController@createList');
   Route::get('list/update/{id}','UserListController@showUpdateForm')->where(['id' => '[0-9]+']);
   Route::patch('list/update','UserListController@updatelist')->name('updatelist');
+  Route::delete('list/delete','UserListController@deleteList');
 
   //tasks
   Route::get('list/{id}/tasks','TaskController@showTasks')->where(['id' => '[0-9]+']);
